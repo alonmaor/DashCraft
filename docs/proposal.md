@@ -14,7 +14,7 @@ The input is the location of a store/place where it picks up goods and the locat
 
 ### AI/ML Algorithms
 
-We plan to use A* search to find the shortest path and Markov reward model to reward the agent for completing each delivery in the most efficient manner.
+We plan to use A* search to find the shortest path and Markov reward model and Q-Learning to reward the agent for completing each delivery in the most efficient manner.
 
 
 ### Evaluation Plan
