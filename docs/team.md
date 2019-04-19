@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  DashCraft
+title:  Team
 ---
 
 # {{ page.title }}
