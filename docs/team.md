@@ -1,16 +1,16 @@
 ---
 layout: default
-title:  Team
+title:  DashCraft
 ---
 
 # {{ page.title }}
 
 
-## USER 1
-***UCI Net ID***: ucinetid1
+## 	Danielle Nicole Lavigne
+***UCI Net ID***: lavigned
 
-## USER 2
-***UCI Net ID***: ucinetid2
+## David Sianov
+***UCI Net ID***: dsianov
 
-## USER 3
-***UCI Net ID***: ucinetid3
+## Alon Maor
+***UCI Net ID***: maora
