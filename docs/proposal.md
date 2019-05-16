@@ -7,23 +7,23 @@ title: Proposal
 
 ### Summary of the Project
 
-Our agent, DashCraft, was just hired by a delivery company. Its goal is to explore the map and make deliveries in the shortest time possible. For each successful delivery, it will receive money as a reward. If it fails to find its destination or is unable to complete a delivery in a given time, the agent will not get paid for that delivery.
+Our agent, DashCraft, was just hired by a delivery company. Its goal is to try to maximize its profits. For each successful delivery, it will receive a tip as a reward. For each house the agent delivers to there is a certain rewards, determined by the time it took and how tolerant the customers are. In order to maximize profit DashCraft would need to find the best combination and order of houses to deliver to.
 
-The input is the location of a store/place where it picks up goods and the location of the final destination where the goods will be delivered. The agent should find a path and return this path. Eventually, after training, the agent should consistently output the shortest and best path possible.
+The input for our agent would be a set of houses represented as x,y coordinates which the agent would need to pick from. Additionally, the agent has to come back to the distribution center in order to refuel and pick up more orders to deliver. If the agent fails to do so, it will run out of gas and will receive a reward of negative infinity. Eventually, after training, the agent should consistently pick the houses that would yield the best profits/rewards while making sure the fuel tank is never empty. In game, fuel will be represented as hearts for the agent.
 
 
 ### AI/ML Algorithms
 
-We plan to use A* search to find the shortest path and Markov reward model and Q-Learning to reward the agent for completing each delivery in the most efficient manner.
+We plan to use Dijkstra search to find the shortest path from each house and Q-Learning to compute the reward for the agent for completing each delivery, according to the time and an alpha variable representing the tolerance of the residents.
 
 
 ### Evaluation Plan
 
 **Quantitative:**
-We will evaluate our agent’s performance based on the amount of moves it takes to deliver the food, the quality of the path (such as dirt road or a paved trail), whether it was successful in delivering it, or whether it fell into lava/a pit. The baseline for our agent will be completing each delivery, even if it’s not done in the most efficient way possible. We expect our approach to improve from just completing each delivery to completing each delivery in the shortest amount of time using the best path. We will use Markov reward process in order to rate these different states and the total cost of the path. The agent will then try to optimize its path using the reward system. The data we will evaluate on is the path returned by the agent. We’ll compare it to the shortest path we’ve calculated for each delivery. We’ll also examine the different types of blocks in the path to see if they’re optimal.
+We will evaluate our agent’s performance based on how it optimizes its rewards from run to run. The baseline for our agent will be completing each delivery, even if it’s not done in the most efficient way possible. We expect our approach to improve from just completing all the deliveries and having enough fuel to actually making it with the most reward. We will evaluate the path from each house to another by distance and use that from the time variable in assessing the reward. The agent will then try to optimize its path using the reward system, which is based on Markov Reward Process.
 
 **Qualitative:**
-Sanity cases for the approach are making sure our agent is able to find its way around the map successfully without falling into any traps and checking to see if our agent is able to consistently find its start and end destinations. We'll visualize the internals of the algorithm by drawing out Markov chains to make sure our agent is correctly rewarded. We'll also create customized instances of maps in which we know the optimal paths so we can use these for testing. We'll compare this known path to the path chosen by our agent and reward the agent for each block it chooses correctly. We'll also reward our agent for each successful delivery. Our moonshoot case is our agent completing every delivery in the shortest time possible using the most optimal path, even if it's put in a new map it hasn't learned yet. If it's not able to find the optimal path right away in a new environment, we hope it'll be able to quickly learn about this environment and optimize based of this information.
+Sanity cases for the approach are making sure our agent is able to find its way around a small map successfully with a few house, and checking to see if our agent is able to consistently find the optimal path. We'll visualize the internals of the algorithm by drawing out Markov chains to make sure our agent is correctly rewarded. We'll also create customized instances of maps with simple rewards system in which we know the optimal paths so we can use these for testing. We'll compare this known path to the path chosen by our agent and reward the agent for each house it chooses correctly. We'll also reward our agent for each successful delivery. Our moonshoot case is our agent consistently completing all the deliveries using the most optimal path, even in a very large environment.
 
 
 ### Appointment with the Instructor
