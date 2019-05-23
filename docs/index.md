@@ -10,3 +10,6 @@ Reports:
 - [Proposal](proposal.html)
 - [Status](status.html)
 - [Final](final.html)
+
+![GitHub Logo](/minePic.png)
+Format: ![Alt Text](url)
