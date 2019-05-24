@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-<img src="https://offgamers.com/blog/wp-content/uploads/2015/06/mc.png">
+<img src="https://teambeyond.net/wp-content/uploads/2016/06/Minecraft-Header.jpg">
 
 Source code: https://github.com/alonmaor/DashCraft
 
