@@ -12,8 +12,8 @@ The goal of the DashCraft is finding the best combination and order of houses to
 
 <img src="https://foodtechconnect.com/wp-content/uploads/2015/05/DoorDash-Logo.jpg">
 
-Reports:
+####Reports:
 
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
+- [##Proposal](proposal.html)
+- [##Status](status.html)
+- [##Final](final.html)
