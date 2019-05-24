@@ -5,7 +5,7 @@ title: Status
 
 ## Project Summary
 
-## Approch
+## Approach
 
 ## Remaining Goals and Challenges
 
