@@ -14,6 +14,6 @@ The goal of the DashCraft is finding the best combination and order of houses to
 
 #### Reports:
 
-- [## Proposal](proposal.html)
-- [## Status](status.html)
-- [## Final](final.html)
+- [<h2> Proposal</h2>](proposal.html)
+- [Status](status.html)
+- [Final](final.html)
