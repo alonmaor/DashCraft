@@ -17,3 +17,6 @@ The goal of the DashCraft is finding the best combination and order of houses to
 - [Proposal](proposal.html)
 - [Status](status.html)
 - [Final](final.html)
+
+| ALON          | Danielle Nicole Lavigne | David  |
+| ------------- |:-------------:| -----:|
