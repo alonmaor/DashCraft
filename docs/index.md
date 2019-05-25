@@ -8,7 +8,7 @@ title:  Home
 Source code: https://github.com/alonmaor/DashCraft
 
 Welcome to DashCraft. This is ML and AI project, based off Malmo-Minecraft ptoject for CS175 class.
-The goal of the DashCraft is finding the best combination and order of houses to deliver a food. DashCraft inspired from DoorDash. 
+The goal of the DashCraft is finding the best combination and order of houses to deliver a food. DashCraft is inspired by DoorDash. 
 
 <img src="https://i.imgur.com/gL0jkDK.png">
 
