@@ -25,6 +25,3 @@ Reports:
 
 
 
-TEAM: | Alon Maor   | Danielle Nicole Lavigne |David Sianov|
-| -------------|:-------------:|:-------------:| -----:|
-
