@@ -14,9 +14,9 @@ The goal of the DashCraft is finding the best combination and order of houses to
 
 ###### Reports:
 
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
+- [*Proposal*](proposal.html)
+- [*Status*](status.html)
+- [*Final*](final.html)
 
 TEAM: | `Alon Maor`   | `Danielle Nicole Lavigne` | `David Sianov`|
 | -------------|:-------------:|:-------------:| -----:|
