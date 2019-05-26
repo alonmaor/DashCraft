@@ -25,7 +25,7 @@ After considering all these factors, this was our final algorithm:
 5. update current state to be chosen state
 6. repeat steps 3-6 if the list of possible actions isn't empty
 
-## Approach
+## Evaluation
 
 
 
