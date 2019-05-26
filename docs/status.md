@@ -7,6 +7,8 @@ title: Status
 
 Our agent, Dashcraft, must deliver food to houses in the most efficient way possible. To do so, it must evaluate the different paths it can take and the different rewards that will result from these combinations of paths. In the beginning, our agent will explore the map and try out different paths, learning which are better along the way. Our goal is for our agent to consistently choose the most efficient path in order to obtain the maximum reward at the end of every run.
 
+<img src="game.jpg">
+
 ## Approach
 
 We used reinforcement learning to train our agent. We utilized a q-table to keep track of our states, actions, and rewards. Our space consisted of 4 states (three houses and the base location) and 4 actions (travel to each of the three houses or return to the base location). Each house had a different alpha value which would help calculate the reward given once it was visited. The rewards would be calculated by multiplying each alpha value by the number of steps our agent has taken then subtracting this value from 100. Therefore, using this formula, houses with a higher alpha value should be visited first since they'll be multiplied by a smaller number of steps, resulting in a higher reward. 
