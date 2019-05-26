@@ -17,7 +17,7 @@ We also evaluated and adjusted the parameters used for our q-table in order to o
 
 We used the Bellman equations to choose our action at each state. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action with the maximum reward. The equation used to calculate the reward for each action is as follows:
 <img align="middle" src="https://i.imgur.com/XNl2rQ2.png">
-where q = the current state, a = the chosen action, R = the immediate reward, and gamma = how much we value future rewards vs. current rewards.
+where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = how much we value future rewards vs. current rewards.
 
 After considering all these factors, this was our final algorithm:
 1. create and initialize all variables, parameters, and rewards 
