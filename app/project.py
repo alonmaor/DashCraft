@@ -22,7 +22,7 @@ class DashAgent(object):
         self.epsilon_min = 0.001
         self.n = 1
         self.gamma = 1
-        self.alpha = 1
+        self.alpha = 0.3
         self.rewards_map = {}
         self.alpha_reward = {210: 0.5, 409: 0.2, 166: 0.7}
         self.q_table = {}
