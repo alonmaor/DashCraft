@@ -29,7 +29,7 @@ After considering all these factors, this was our final algorithm:
 
 ## Evaluation
 
-
+<img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
 
 ## Remaining Goals and Challenges
 
