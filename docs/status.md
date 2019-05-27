@@ -48,5 +48,4 @@ Expected Challenges:
   
 ## VIDEO
 
-<a href=" https://www.youtube.com/watch?v=-pt-PQO0bHQ&feature=youtu.be" target="_blank"></a>
 
