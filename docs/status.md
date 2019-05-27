@@ -39,7 +39,7 @@ Based off the alpha values we created for each house, we knew the most optimal p
 Graph of policy rewards for each run during training:
 <img src="https://cdn.discordapp.com/attachments/576232242750291970/582376049489215522/Figure_1.png">
 
-<img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
+ <img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
 
 ## Remaining Goals and Challenges
 
