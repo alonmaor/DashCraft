@@ -48,5 +48,5 @@ Expected Challenges:
   
 ## VIDEO
 
-[![](http://img.youtube.com/vi/-pt-PQO0bHQ&feature=youtu.be/0.jpg)](http://www.youtube.com/watch?v=-pt-PQO0bHQ&feature=youtu.be)
+[![HERE](http://img.youtube.com/vi/-pt-PQO0bHQ&feature=youtu.be/0.jpg)](http://www.youtube.com/watch?v=-pt-PQO0bHQ&feature=youtu.be)
 
