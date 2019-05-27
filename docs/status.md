@@ -33,18 +33,22 @@ After considering all these factors, this was our final algorithm:
 
 ## Remaining Goals and Challenges
 
-Some of our next goals time permitting:
-  * Making the decision process more complex - possibly with deep neural networks
-  * Increasing the environment and adding more houses
-  * Adding a feature where agent has to come back to "refuel"
-    - By decreasing its hearts after every delivery
-    - Hearts recharge after agent returns to "distribtion center" at origin
-  * Making the environment more interesting by adding roads, obstacles and more
+Our prototype at the moment is limited because it consists of a small environment. There are only four states and actions, which doesn't give our agent a lot of information to evaluate when making decisions. The way rewards are calculated right now is also fairly simple. Each state has a specific value that is directly used to calculate rewards. Instead of this, we plan on adding conditions that alter the way rewards are calculated. For example, visiting house 1 before houses 2 and 3 could make the reward gained from house 1 larger than visiting house 1 in a different order.
+
+Some of our next goals if time permits:
+  * Make the decision process more complex - possibly with deep neural network
+  * Expand the environment and add more houses
+  * Add a feature where agent has to return to origin to "refuel"
+    - Decrease its hearts after every delivery to track how much fuel is remaining
+    - Hearts recharge after agent returns to "distribution center" at origin
+  * Make the environment more interesting by adding roads, obstacles, and more
+  * Add conditionals and factors that affect our agent’s decision making
+  * Adjust parameters so DashCraft can find the most optimal path sooner and more consistently
   
 Expected Challenges:
-  * An environment too large could make decision process inefficient
+  * An environment too large could make the decision process inefficient
   * Obstacles could make shortest path problem much harder
-  * Unsure about the possibilities of controlling agent's hearts
+  * Must figure out how to control agent's heart count
   
 ## VIDEO
 
