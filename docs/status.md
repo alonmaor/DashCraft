@@ -31,7 +31,7 @@ After considering all these factors, this was our final algorithm:
 
 We evaluated our agent by first making sure it passed our sanity cases. None of us have worked in the Malmo environment before, so it took some time to get used to. Once we created a simple enviroment, we just had our agent navigate to each of the houses using our shortest path algorithm. After our agent was able to complete this task successfully, we implemented Q-Learning.
 
-Once we implemented a basic Q-Learning algorithm, we made sure it was actually calculating and updating values. We were able to check this by printing out our Q-Table during every run. We compared the values it was calculating against our expected values. Since our expected values could be calculated using a fairly simple math equation (50 - alpha * step count), this wasn't too difficult to be evaluate. 
+Once we implemented a basic Q-Learning algorithm, we made sure it was actually calculating and updating values. We were able to check this by printing out our Q-Table during every run. We compared the values it was calculating against our expected values. Since our expected values could be calculated using a fairly simple math equation (50 - alpha * step count), this wasn't too difficult to evaluate. 
 Example of Q-Table and rewards being printed during every run:
 <img align="middle" src="https://i.imgur.com/VKrENK8.png">
 
