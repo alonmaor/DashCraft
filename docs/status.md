@@ -33,7 +33,7 @@ We evaluated our agent by first making sure it passed our sanity cases. None of 
 
 Once we implemented a basic Q-Learning algorithm, we made sure it was actually calculating and updating values. We were able to check this by printing out our Q-Table during every run. We compared the values it was calculating against our expected values. Since our expected values could be calculated using a fairly simple math equation (50 - alpha * step count), this wasn't too difficult to be evaluate. 
 
-<img align="middle" src="https://i.imgur.com/M2jIX5k.png">
+<img align="middle" src="https://i.imgur.com/VKrENK8.png">
 Example of Q-Table and rewards being printed during every run.
 
 <img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
