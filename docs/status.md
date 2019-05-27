@@ -36,6 +36,8 @@ Example of Q-Table and rewards being printed during every run:
 <img align="middle" src="https://i.imgur.com/VKrENK8.png">
 
 Based off the alpha values we created for each house, we knew the most optimal path was left house, right house, middle house. As we watched our agent complete its runs, we would note how long it took to consistently take this path. Originally, it would take many runs before it would take this path multiple times in the row. Even at this point, it'd still occasionally take a less optimal path. Although this wasn't the ideal situation, it brought us closer to our end goal. Eventually, after adjusting many parameters, our agent started to converge to the correct solution much quicker. 
+Graph of policy rewards for each run during training:
+<img src="https://cdn.discordapp.com/attachments/576232242750291970/582376049489215522/Figure_1.png">
 
 <img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
 
