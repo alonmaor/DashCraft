@@ -39,7 +39,7 @@ Based off the alpha values we created for each house, we knew the most optimal p
 Graph of policy rewards for each run during training:
 <img src="https://cdn.discordapp.com/attachments/576232242750291970/582376049489215522/Figure_1.png">
 
- <img src="https://cdn.discordapp.com/attachments/576238522147799059/582394325581824044/unknown.png">
+For our final evalution, we let our agent complete several runs. While this was happening, we observed it to make sure it consistently chose the most optimal path once it learned it produced the highest reward. We found this to be the case which concluded our status report evalution. We'll complete similar evalutions in the future once we add more features to our agent and its environment.
 
 ## Remaining Goals and Challenges
 
@@ -59,6 +59,12 @@ Expected Challenges:
   * An environment too large could make the decision process inefficient
   * Obstacles could make shortest path problem much harder
   * Must figure out how to control agent's heart count
+  
+## Resources Used
+  * [David Silver's Lectures on Reinforcement Learning](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
+  * [Article on Bellman Equation](https://joshgreaves.com/reinforcement-learning/understanding-rl-the-bellman-equations/)
+  * [Q-Learning Tutorial](mnemstudio.org/path-finding-q-learning-tutorial.htm)
+  
   
 ## VIDEO
 
