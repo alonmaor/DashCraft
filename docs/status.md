@@ -48,5 +48,5 @@ Expected Challenges:
   
 ## VIDEO
 
-[![HERE](http://img.youtube.com/vi/-pt-PQO0bHQ&feature=youtu.be/0.jpg)](http://www.youtube.com/watch?v=-pt-PQO0bHQ&feature=youtu.be)
+[![](http://img.youtube.com/vi/Dm4Q7a0MgqM/0.jpg)](http://www.youtube.com/watch?v=Dm4Q7a0MgqM "Status Report - DashCraft")
 
