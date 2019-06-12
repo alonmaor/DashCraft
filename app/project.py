@@ -25,7 +25,7 @@ class DashAgent(object):
         self.gamma = 1
         self.alpha = 1
         self.rewards_map = {}
-        self.alpha_reward = {210: 0.5, 409: 0.7, 167: 0.2, 178: 0.9, 418: 0.5, 399: 0.5}
+        self.alpha_reward = {210: 0.5, 409: 0.7, 167: 0.2, 178: 0.9, 418: 0.5, 399: 0.5} 
         self.q_table = {}
         self.current_state = ()
         self.step_count = 0 # time
@@ -46,8 +46,8 @@ class DashAgent(object):
         present_reward = 0
         done_update = False
         while not done_update:
-            a0 = self.choose_action(self.current_state, self.possible_actions, self.epsilon, self.mission_number)
-            S.append(self.current_state)
+            a0 = self.choose_action(frozenset(self.current_state), self.possible_actions, self.epsilon, self.mission_number)
+            S.append(frozenset(self.current_state))
             A.append(a0)
             R.append(0)
 
@@ -66,7 +66,7 @@ class DashAgent(object):
                         # present_reward = current_r
                         # print("Reward:", present_reward)
                     else:
-                        s = self.current_state
+                        s = frozenset(self.current_state)
                         S.append(s)
                         possible_actions = self.possible_actions
                         next_a = self.choose_action(s, possible_actions, self.epsilon, self.mission_number)
@@ -93,7 +93,7 @@ class DashAgent(object):
         if dest == 0:
             return 0
         self.current_state += (dest,)
-        return 30 - self.alpha_reward[dest]*self.step_count
+        return self.alpha_reward[dest]*self.step_count
 
     def execute_actions(self, agent_host, world_state, action_list):
         action_index = 0
@@ -125,7 +125,6 @@ class DashAgent(object):
                 pq[i] = float("inf")
 
     def get_shortest_path(self, grid_obs, source, dest):
-        print(grid_obs)
         q = PQ()
         self.init_pq(grid_obs, q)
         q[source] = 0
@@ -202,9 +201,6 @@ class DashAgent(object):
             return random.choice(a)
 
 
-    def is_solution(self, reward):
-        return reward == 300
-
     def best_action(self, curr_state):
         if curr_state in self.q_table:
             a = []
@@ -280,7 +276,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 21
+    num_repeats = 2
 
 
 mission_file = './project.xml'
@@ -329,8 +325,10 @@ for i in range(num_repeats):
     
     #time.sleep(0.5) # (let the Mod reset)
 
-plt.plot([i for i in range(20)], best_rewards, 'ro')
-plt.axis([0, 21, 25, 45])
+plt.plot(best_rewards, 'ro')
+#plt.axis()
+plt.ylabel("Best Reward")
+plt.xlabel("Runs")
 plt.show()
 
 print("Done.")
