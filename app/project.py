@@ -10,6 +10,7 @@ import random
 import sys
 import time
 import numpy
+import matplotlib.pyplot as plt
 from collections import defaultdict, deque
 from priority_dict import priorityDictionary as PQ
 
@@ -19,19 +20,20 @@ class DashAgent(object):
     def __init__(self, destinations):
         self.epsilon = 1
         self.epsilon_decay = 0.995
-        self.epsilon_min = 0.001
+        self.epsilon_min = 0.02
         self.n = 1
         self.gamma = 1
-        self.alpha = 0.3
+        self.alpha = 1
         self.rewards_map = {}
-        self.alpha_reward = {210: 0.5, 409: 0.2, 166: 0.7}
+        self.alpha_reward = {210: 0.5, 409: 0.7, 167: 0.2, 178: 0.9, 418: 0.5, 399: 0.5}
         self.q_table = {}
         self.current_state = ()
         self.step_count = 0 # time
         self.current_location = 0
         self.mission_number = 0
+        self.items = ['cooked_porkchop','cooked_fish','cake','cooked_chicken','cooked_beef']
 
-        self.possible_actions = destinations # later - indexes for houses
+        self.possible_actions = destinations
         self.grid = []
 
         
@@ -51,7 +53,7 @@ class DashAgent(object):
 
             T = sys.maxsize
             for t in range(sys.maxsize):
-                print(self.q_table)
+                # print(self.q_table)
                 time.sleep(0.1)
                 if t < T:
                     current_r = self.act(self.current_location, A[-1], self.grid)
@@ -61,8 +63,8 @@ class DashAgent(object):
                     if len(self.possible_actions) == 0:
                         # Terminating state
                         T = t + 1
-                        present_reward = current_r
-                        print("Reward:", present_reward)
+                        # present_reward = current_r
+                        # print("Reward:", present_reward)
                     else:
                         s = self.current_state
                         S.append(s)
@@ -91,7 +93,7 @@ class DashAgent(object):
         if dest == 0:
             return 0
         self.current_state += (dest,)
-        return 50 - self.alpha_reward[dest]*self.step_count
+        return 30 - self.alpha_reward[dest]*self.step_count
 
     def execute_actions(self, agent_host, world_state, action_list):
         action_index = 0
@@ -119,10 +121,11 @@ class DashAgent(object):
 
     def init_pq(self, grid, pq):
         for i, block in enumerate(grid):
-            if block != 'air':
+            if block == 'air' or block == 'wooden_door':
                 pq[i] = float("inf")
 
     def get_shortest_path(self, grid_obs, source, dest):
+        print(grid_obs)
         q = PQ()
         self.init_pq(grid_obs, q)
         q[source] = 0
@@ -133,13 +136,13 @@ class DashAgent(object):
         for node in q:
             #neighbors = [node-21,node-1,node+1,node+21]
             neighbors = []
-            if node not in range(0,21):
+            if node not in range(0,21) and grid_obs[node-21] in ['air','wooden_door','tallgrass','double_plant']:
                 neighbors.append(node-21)
-            if (node + 1) % 21 != 0:
+            if (node + 1) % 21 != 0 and grid_obs[node+1] in ['air','wooden_door','tallgrass','double_plant']:
                 neighbors.append(node+1)
-            if node % 21 != 0:
+            if node % 21 != 0 and grid_obs[node-1] in ['air','wooden_door','tallgrass','double_plant']:
                 neighbors.append(node-1)
-            if node not in range(420, 441):
+            if node not in range(420, 441) and grid_obs[node+21] in ['air','wooden_door','tallgrass','double_plant']:
                 neighbors.append(node+21)
             for n in neighbors:
                 alt = 0
@@ -180,7 +183,7 @@ class DashAgent(object):
             if action not in self.q_table[curr_state]:
                 self.q_table[curr_state][action] = 0
 
-        if len(possible_actions) == 3 and mission_number != 0 and (mission_number % 2 == 0):
+        if len(possible_actions) == 3 and mission_number != 0 and (mission_number % 5 == 0):
             print("eps = ", self.epsilon)
             if self.epsilon > self.epsilon_min:
                 self.epsilon *= self.epsilon_decay
@@ -190,34 +193,45 @@ class DashAgent(object):
         if choice == 1: 
             # rnd = random.random()
             a = random.randint(0, len(possible_actions) - 1)
+            return possible_actions[a]
         else:
             max_val = max(self.q_table[curr_state].values())
             for act, v in self.q_table[curr_state].items():
                 if v == max_val:
                     a.append(act)
             return random.choice(a)
-        return possible_actions[a]
+
 
     def is_solution(self, reward):
         return reward == 300
 
+    def best_action(self, curr_state):
+        if curr_state in self.q_table:
+            a = []
+            max_val = max(self.q_table[curr_state].values())
+            for act, v in self.q_table[curr_state].items():
+                if v == max_val:
+                    a.append(act)
+            return random.choice(a)
+        else:
+            return None
+
     def best_policy(self, agent_host):
         """Reconstructs the best action list according to the greedy policy. """
         policy = []
-        current_r = 0
-        is_first_action = True
-        next_a = ""
+        total_r = 0
         while len(self.possible_actions) > 0:
             curr_state = self.current_state
             possible_actions = self.possible_actions
-            next_a = self.choose_action(curr_state, possible_actions, 0, self.mission_number)
+            next_a = self.best_action(curr_state)
+            if next_a == None:
+                break
             policy.append(next_a)
-            is_first_action = False
-            current_r += self.act(self.current_location, next_a, self.grid)
+            total_r += self.act(self.current_location, next_a, self.grid)
             self.possible_actions.remove(next_a)
         self.act(self.current_location, 0, self.grid)
-        print(' with reward %.1f' % (current_r))
-        return current_r
+        print('Best reward: ' + str(total_r))
+        return total_r
 
     def update_q_table(self, tau, S, A, R, T):
         """Performs relevant updates for state tau.
@@ -245,8 +259,8 @@ class DashAgent(object):
         self.q_table[curr_s][curr_a] = q_value + G
 
 
-destinations = [210, 409, 166]
-agent = DashAgent(destinations)
+destinations = [210, 409, 167, 178, 418, 399]
+agent = DashAgent(destinations.copy())
 agent_host = MalmoPython.AgentHost()
 try:
     agent_host.parse( sys.argv )
@@ -266,7 +280,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 500
+    num_repeats = 21
 
 
 mission_file = './project.xml'
@@ -288,19 +302,14 @@ for retry in range(max_retries):
         else:
             time.sleep(2.5)
 print("Waiting for the mission to start", end=' ')
+best_rewards = []
 for i in range(num_repeats):
-
-    #my_clients = MalmoPython.ClientPool()
-    #my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000))
-
-
-    
-    # Attempts to initialize the mission
-    if (i + 1) % 10 == 0:
+    if i > 0:
+        print(agent.q_table)
         agent.current_state = ()
-        agent.possible_actions = [210, 409, 166]
+        agent.possible_actions = destinations.copy()
         agent.step_count = 0
-        agent.best_policy(agent_host)
+        best_rewards.append(agent.best_policy(agent_host))
    
     world_state = agent_host.getWorldState()
     while not world_state.has_mission_begun:
@@ -314,19 +323,15 @@ for i in range(num_repeats):
 
     # Initialize
     agent.current_state = ()
-    agent.possible_actions = [210, 409, 166]
+    agent.possible_actions = destinations.copy()
     agent.step_count = 0
-    agent.mission_number = i
     agent.run(agent_host)
     
-    #found_solution = agent.best_policy(agent_host)
-    # if found_solution:
-    #     print('Found solution')
-    #     print('Done')
-    #     break
+    #time.sleep(0.5) # (let the Mod reset)
 
-        # -- clean up -- #
-    time.sleep(0.5) # (let the Mod reset)
+plt.plot([i for i in range(20)], best_rewards, 'ro')
+plt.axis([0, 21, 25, 45])
+plt.show()
 
 print("Done.")
 
