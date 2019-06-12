@@ -2,7 +2,7 @@
 <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <About>
-    <Summary>Cliff walking mission based on Sutton and Barto.</Summary>
+    <Summary>Dash Craft Delivery Guy</Summary>
   </About>
 
   <ServerSection>
@@ -38,8 +38,7 @@
         <DrawCuboid x1="20"  y1="4" z1="20"  x2="18" y2="6" z2="22" type="cobblestone" />
         <DrawCuboid x1="19"  y1="4" z1="19"  x2="19" y2="5" z2="20" type="air" />
         <DrawCuboid x1="19"  y1="4" z1="19"  x2="19" y2="5" z2="19" face="NORTH" type="wooden_door" />
-        <DrawBlock x="12"  y="4" z="12" type="redstone_lamp" />
-        
+
       </DrawingDecorator>
       <ServerQuitFromTimeUp timeLimitMs="2000000"/>
       <ServerQuitWhenAnyAgentFinishes/>
