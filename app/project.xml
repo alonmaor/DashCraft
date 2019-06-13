@@ -2,7 +2,7 @@
 <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <About>
-    <Summary>Dash Craft Delivery Guy</Summary>
+    <Summary>Dash Craft Deliveries</Summary>
   </About>
 
   <ServerSection>
@@ -40,7 +40,7 @@
         <DrawCuboid x1="19"  y1="4" z1="19"  x2="19" y2="5" z2="19" face="NORTH" type="wooden_door" />
 
       </DrawingDecorator>
-      <ServerQuitFromTimeUp timeLimitMs="2000000"/>
+      <ServerQuitFromTimeUp timeLimitMs="200000000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>
   </ServerSection>
