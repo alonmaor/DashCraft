@@ -32,9 +32,9 @@ Since our Q-Table printed out the reward at the end of every fifth run, we were 
 We also confirmed our algorithm was converging by printing out a graph that mapped the run to the reward:
 <img src="https://i.imgur.com/PnMEeFo.png">
 
-As you can see, our graph clearly converged to the highest reward found by the most optimal path as our runs increased and our agents continued to learn.
+As you can see, our graph clearly converged to the highest reward found by the most optimal path as our runs increased and our agent continued to learn. We were easily able to evaluate our quantitative results by assessing our reward values. Printing out this graph helped us also helped us evaluate our qualitative results, since it showed or agent not only found the highest reward value, but it was also consistent in its learning since its reward values gradually increased with very few outliers.
 
-
+These results were achieved through a lot of trial and error relating to the parameters of our Q-learning (such as alpha, gamma, epsilon, etc). Every time we changed a value, we were able to use this as the new basis for our evaluation. We were able to confirm the changes we were making benefited our agent by comparing it to the basis and seeing if the reward values increased or decreased. Tracking these values greatly helped our evaluation and helped us eventually solve our problem and reach our goal. In the end, we were able to train an agent to consistently choose the best path and receive the maximum possible reward value when making deliveries to houses. 
 
 ## References
 
