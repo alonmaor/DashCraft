@@ -20,6 +20,14 @@ In the beginning of our training, we let our agent explore the map and try out s
 
 
 ## Evaluation
+We first evaluated our project by making sure our agent could navigate a simple map. We used Dijstrak’s shortest path algorithms to ensure our agent could correctly navigate to each house without falling off the map or getting stuck. After this, we implemented a simple version of Q-Learning with only 3 houses. Since there were so few states in our Q-Table, it was easy to see if our agent was consistently choosing the best path every time. We knew our alpha values that would be used to calculate the reward gained from each house. While keeping these values in mind, we would run our agents several times and check to see if it converged to the best path every time by checking it against these values. Our most optimal path at the time was left house, right house, then middle house. It was clear to see our agent was visiting houses in this order, so we passed this base cases and could move on to making our environment more complicated.
+
+Instead of having only 3 houses, we updated our environment to have 6 houses which increased the complexity of our problem and the number of states in our Q-Table.  Again, we assigned alpha values to each house and used these values to calculate the best order to visit houses. While we were running our agent, we printed out the Q-Table every 5 runs and compared these against our expected values.
+
+Here’s an example of our Q-Table after 5 and 10 runs:
+<img src="https://i.imgur.com/CJuXP2W.png">
+
+Since our Q-Table printed out the reward at the end of every fifth run, we were able to confirm that our agent was correctly learning better paths and starting to converge as the number of runs increased. 
 
 
 ## References
