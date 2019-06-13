@@ -29,6 +29,12 @@ Here’s an example of our Q-Table after 5 and 10 runs:
 
 Since our Q-Table printed out the reward at the end of every fifth run, we were able to confirm that our agent was correctly learning better paths and starting to converge as the number of runs increased. 
 
+We also confirmed our algorithm was converging by printing out a graph that mapped the run to the reward:
+<img src="https://i.imgur.com/PnMEeFo.png">
+
+As you can see, our graph clearly converged to the highest reward found by the most optimal path as our runs increased and our agents continued to learn.
+
+
 
 ## References
 
