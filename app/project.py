@@ -131,18 +131,21 @@ class DashAgent(object):
         prev = dict()
         dist = q.copy()
         [prev.update({key:None}) for key in q.keys()]
-
         for node in q:
-            #neighbors = [node-21,node-1,node+1,node+21]
             neighbors = []
-            if node not in range(0,21) and grid_obs[node-21] in ['air','wooden_door','tallgrass','double_plant']:
-                neighbors.append(node-21)
-            if (node + 1) % 21 != 0 and grid_obs[node+1] in ['air','wooden_door','tallgrass','double_plant']:
-                neighbors.append(node+1)
-            if node % 21 != 0 and grid_obs[node-1] in ['air','wooden_door','tallgrass','double_plant']:
-                neighbors.append(node-1)
-            if node not in range(420, 441) and grid_obs[node+21] in ['air','wooden_door','tallgrass','double_plant']:
-                neighbors.append(node+21)
+            try:
+                if node not in range(0,21) and grid_obs[node-21] in ['air','wooden_door','tallgrass','double_plant']:
+                    neighbors.append(node-21)
+                if (node + 1) % 21 != 0 and grid_obs[node+1] in ['air','wooden_door','tallgrass','double_plant']:
+                    neighbors.append(node+1)
+                if node % 21 != 0 and grid_obs[node-1] in ['air','wooden_door','tallgrass','double_plant']:
+                    neighbors.append(node-1)
+                if node not in range(420, 441) and grid_obs[node+21] in ['air','wooden_door','tallgrass','double_plant']:
+                    neighbors.append(node+21)
+            except IndexError as ie:
+                print(ie)
+                print("Index: " + str(node))
+                print(q)
             for n in neighbors:
                 alt = 0
                 if n in dist:
@@ -219,7 +222,7 @@ class DashAgent(object):
         while len(self.possible_actions) > 0:
             curr_state = self.current_state
             possible_actions = self.possible_actions
-            next_a = self.best_action(curr_state)
+            next_a = self.best_action(frozenset(curr_state))
             if next_a == None:
                 break
             policy.append(next_a)
@@ -230,29 +233,13 @@ class DashAgent(object):
         return total_r
 
     def update_q_table(self, tau, S, A, R, T):
-        """Performs relevant updates for state tau.
-
-        Args
-            tau: <int>  state index to update
-            S:   <dequqe>   states queue
-            A:   <dequqe>   actions queue
-            R:   <dequqe>   rewards queue
-            T:   <int>      terminating state index
-        """
-        # curr_s, curr_a, curr_r = S.popleft(), A.popleft(), R.popleft()
-        # G = sum([self.gamma ** i * R[i] for i in range(len(S))])
-        # if tau + self.n < T:
-        #     G += self.gamma ** self.n * self.q_table[S[-1]][A[-1]]
-
-        # old_q = self.q_table[curr_s][curr_a]
-        # self.q_table[curr_s][curr_a] = old_q + self.alpha * (G - old_q)
         curr_s, curr_a, curr_r = S.popleft(), A.popleft(), R.popleft()
 
-        q_value = R[0]
+        reward = R[0]
         G = 0
         if tau < T - 1:
             G = self.gamma*max(self.q_table[S[-1]].values())
-        self.q_table[curr_s][curr_a] = q_value + G
+        self.q_table[curr_s][curr_a] = reward + G
 
 
 destinations = [210, 409, 167, 178, 418, 399]
@@ -276,7 +263,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 2
+    num_repeats = 200
 
 
 mission_file = './project.xml'
@@ -300,7 +287,7 @@ for retry in range(max_retries):
 print("Waiting for the mission to start", end=' ')
 best_rewards = []
 for i in range(num_repeats):
-    if i > 0:
+    if i > 0 and i%5 == 0:
         print(agent.q_table)
         agent.current_state = ()
         agent.possible_actions = destinations.copy()
