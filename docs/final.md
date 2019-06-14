@@ -24,6 +24,7 @@ In terms of the reward calculation, we have updated the equation to have a produ
 Each house still has a different alpha value which would help calculate the reward given once it was visited. While before we were calculating the reward based multiplying each alpha value by the step count then subtracting this value from 50, we realized it made more sense to have the reward more straighforward as a product. Therefore, using this new formula, houses with a higher alpha value should be visited first since they'll be multiplied by a larger number of steps, resulting in a higher reward. So rather than having alphas reflect level of intolerence, they now represent tolerance. This means that going to a house with low tolerance first and then to a house with high tolerance later will present our agent with a higher reward.
 
 Using the same Bellman equations as before to choose our action at each state, we have learned we are still getting good results for the increased number of houses and states. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action with the maximum reward. The equation used to calculate the reward for each action is as follows:
+
 <img align="middle" src="https://i.imgur.com/XNl2rQ2.png">
 where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = discount factor, whuch determined how much we value future rewards vs. current rewards.
 
