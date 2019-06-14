@@ -22,12 +22,13 @@ In order to manage the states, actions, and their rewards, we used the Q-Learnin
 
 Here are the basics of our Q-Learning algorithm:
 >Initialize δ(q<sub>x</sub>, a<sub>x</sub>) arbitrarily
+
 >Repeat for each run:
 ><p style="text-indent: 40px">Chooose a from q using the policy derived from δ (ε in our case)</p>
 ><p style="text-indent: 40px">Execute action a and observe reward r, q'</p>
 ><p style="text-indent: 40px">Update δ(q<sub>x</sub>, a<sub>x</sub>)</p>
 ><p style="text-indent: 40px">Update state q</p>
->until q is terminal
+>Until q is terminal
 
 We also updated the way we calculated our rewards. Our new reward equation is shown below:
 >reward = alpha_reward[house]*step_count
