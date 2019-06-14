@@ -20,6 +20,11 @@ In the beginning of our training, we let our agent explore the map and try out s
 ## Approaches
 In order to manage the states, actions, and their rewards, we used the Q-Learning Reinforcement Learning method. After updating the number of houses from 3 to 6, our state space greatly increased, making our initial implementation unfeasible. In our status report, we thought the ordering of the houses was important, so this was something we kept track of. However, we eventually realized the ordering of the houses has no effect on the state. For this reason, we updated our states to be a frozenset (which is basically the immutable version of a set) rather than tuples, since the keys and states must be immutable in the dictionary. After we made that transition, the state space decreased significantly which made it feasible to use an implementation that was very similar to our inital implementation with a few tweaks, even though we increased the number of houses.
 
+Here are the basics of our Q-Learning algorithm:
+<div lang="latex">
+>Initialize δ(q_x, a_x) arbitrarily
+</div>
+
 We also updated the way we calculated our rewards. Our new reward equation is shown below:
 >reward = alpha_reward[house]*step_count
 
@@ -27,6 +32,7 @@ Each house was assigned a different alpha value which would help calculate the r
 
 We used Bellman equations like before to choose our action at each state. After monitoring our agent, we found we were still achieving good results even though the state space and number of houses had increased. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action that would maximize its reward. The equation used to calculate the reward for each action is as follows:
 ><img align="middle" src="https://i.imgur.com/XNl2rQ2.png">
+
 where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = discount factor, which determined how much we value future rewards vs. current rewards.
 
 Since our status report, we have found that we may have placed a higher weight than neccessary on future rewards. However, this was a simple fix. Adjusting the gamma value to 0.8, which slightly lowered the weight of future rewards, gave us an optimal result. We also changed the calculation for our epsilon to a different decay algorithm:
