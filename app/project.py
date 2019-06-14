@@ -185,7 +185,7 @@ class DashAgent(object):
             if action not in self.q_table[curr_state]:
                 self.q_table[curr_state][action] = 0
 
-        if len(possible_actions) == 3 and mission_number != 0 and (mission_number % 5 == 0):
+        if len(possible_actions) == 6 and mission_number != 0 and (mission_number % 5 == 0):
             print("eps = ", self.epsilon)
             if self.epsilon > self.epsilon_min:
                 self.epsilon *= self.epsilon_decay
@@ -213,7 +213,7 @@ class DashAgent(object):
                     a.append(act)
             return random.choice(a)
         else:
-            return random.choice(self.possible_actions)
+            return None
 
     def best_policy(self, agent_host):
         """Reconstructs the best action list according to the greedy policy. """
@@ -223,8 +223,8 @@ class DashAgent(object):
             curr_state = self.current_state
             possible_actions = self.possible_actions
             next_a = self.best_action(frozenset(curr_state))
-            # if next_a == None:
-            #     break
+            if next_a == None:
+                break
             policy.append(next_a)
             total_r += self.act(self.current_location, next_a, self.grid)
             self.possible_actions.remove(next_a)
@@ -263,7 +263,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 100
+    num_repeats = 200
 
 
 mission_file = './project.xml'
@@ -319,4 +319,7 @@ plt.xlabel("Runs")
 plt.show()
 
 print("Done.")
+
+print()
+print("Cumulative rewards for all %d runs:" % num_repeats)
 # print(cumulative_rewards)
