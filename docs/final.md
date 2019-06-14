@@ -41,9 +41,13 @@ We first evaluated our project by making sure our agent could navigate a simple 
 
 Instead of having only 3 houses, we updated our environment to have 6 houses which increased the complexity of our problem and the number of states in our Q-Table.  Again, we assigned alpha values to each house and used these values to calculate the best order to visit houses. While we were running our agent, we printed out the Q-Table every 5 runs and compared these against our expected values.
 
-Here’s an example of our Q-Table after 5 and 10 runs:
+Here’s an example of our Q-Table after 5 runs:
 
-<img src="https://i.imgur.com/I7ILiqU.png">
+<img src="https://imgur.com/068vCXg">
+
+compared to after 20 runs:
+
+<img src="https://imgur.com/oLe1f9A">
 
 Since our Q-Table printed out the reward at the end of every fifth run, we were able to confirm that our agent was correctly learning better paths and starting to converge as the number of runs increased. 
 
