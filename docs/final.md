@@ -32,7 +32,7 @@ where q = the current state, a = the chosen action, R = the immediate reward, x 
 What we figured out since the status report is that we may have given our future rewards a weight that is too high. Adjusting the gamma value to 0.8, which lowers the weight of future rewards a bit, gave us an optimal result. We've also changed the calculation for our epsilon to a different decay algorithm:
 >epsilon = initial_epsilon^n
 
-where initial epsilon is 0.995. This way our agent is able to explore many paths at first, but later converges down to a few paths and finally to one suboptimal path.
+where initial epsilon is 0.995 and n is number of runs thus far. This way our agent is able to explore many paths at first, but later converges down to a few paths and finally to one suboptimal path.
 
 The advantage of our new approach over the previous approach is big. Earlier we came with the assumption that the agent should come up with the best possible path the maximize reward. But thinking ahead, a better approach would be to try and find a suboptimal path in a reasonable amount of time. If the state space grows significantly, then it would be unreasonable to try and get the optimal path for the agent.
 
