@@ -21,9 +21,7 @@ In the beginning of our training, we let our agent explore the map and try out s
 In order to manage the states, actions, and their rewards, we used the Q-Learning Reinforcement Learning method. After updating the number of houses from 3 to 6, our state space greatly increased, making our initial implementation unfeasible. In our status report, we thought the ordering of the houses was important, so this was something we kept track of. However, we eventually realized the ordering of the houses has no effect on the state. For this reason, we updated our states to be a frozenset (which is basically the immutable version of a set) rather than tuples, since the keys and states must be immutable in the dictionary. After we made that transition, the state space decreased significantly which made it feasible to use an implementation that was very similar to our inital implementation with a few tweaks, even though we increased the number of houses.
 
 Here are the basics of our Q-Learning algorithm:
-<div lang="latex">
->Initialize δ(q_x, a_x) arbitrarily
-</div>
+>Initialize δ(q<sub>x</sub>, a<sub>x</sub>) arbitrarily
 
 We also updated the way we calculated our rewards. Our new reward equation is shown below:
 >reward = alpha_reward[house]*step_count
