@@ -20,7 +20,7 @@ In the beginning of our training, we let our agent explore the map and try out s
 In order to manage the states, actions and their rewards we used the Q-Learning Reinforcement Learning method. After updating the number of houses from 3 to 6 our state space grew so much that our initial implementation was unfeasible. What we have realized is that the ordering of the houses has no effect on the state, but rather projects on the Q-value in the long run. For that reason we updated our states to be frozenset (which are basically the immutable version of a set) rather than tuples, since the keys/states must be immutable in the dictionary. After we have made that transition the state space has decreased significantly which made it possible and feasible to use a very similar implementation with a few twitches, while being able to increase the number of houses.
 
 In terms of the reward calculation, we have updated the equation to have a product of the alpha value and the time step, calculates as step count:
-> alpha_reward[house]*step_count
+```alpha_reward[house]*step_count```
 Each house still has a different alpha value which would help calculate the reward given once it was visited. While before we were calculating the reward based multiplying each alpha value by the step count then subtracting this value from 50, we realized it made more sense to have the reward more straighforward as a product. Therefore, using this new formula, houses with a higher alpha value should be visited first since they'll be multiplied by a larger number of steps, resulting in a higher reward. So rather than having alphas reflect level of intolerence, they now represent tolerance. This means that going to a house with low tolerance first and then to a house with high tolerance later will present our agent with a higher reward.
 
 Using the same Bellman equations as before to choose our action at each state, we have learned we are still getting good results for the increased number of houses and states. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action with the maximum reward. The equation used to calculate the reward for each action is as follows:
@@ -29,7 +29,7 @@ Using the same Bellman equations as before to choose our action at each state, w
 where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = discount factor, whuch determined how much we value future rewards vs. current rewards.
 
 What we figured out since the status report is that we may have given our future rewards a weight that is too high. Adjusting the gamma value to 0.8, which lowers the weight of future rewards a bit, gave us an optimal result. We've also changed the calculation for our epsilon to a different decay algorithm:
-> epsilon = initial_epsilon^n
+```epsilon = initial_epsilon^n```
 ,where initial epsilon is 0.995. This way our agent is able to explore many paths at first, but later converges down to a few paths and finally to one suboptimal path.
 
 The advantage of our new approach over the previous approach is big. Earlier we came with the assumption that the agent should come up with the best possible path the maximize reward. But thinking ahead, a better approach would be to try and find a suboptimal path in a reasonable amount of time. If the state space grows significantly, then it would be unreasonable to try and get the optimal path for the agent.
