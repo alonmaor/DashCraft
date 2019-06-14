@@ -22,7 +22,7 @@ class DashAgent(object):
         self.epsilon_decay = 0.995
         self.epsilon_min = 0.02
         self.n = 1
-        self.gamma = 1
+        self.gamma = 0.8
         self.alpha = 1
         self.rewards_map = {}
         self.alpha_reward = {210: 0.5, 409: 0.7, 167: 0.2, 178: 0.9, 418: 0.5, 399: 0.5} 
@@ -184,14 +184,18 @@ class DashAgent(object):
         for action in possible_actions:
             if action not in self.q_table[curr_state]:
                 self.q_table[curr_state][action] = 0
-
-        if len(possible_actions) == 6 and mission_number != 0 and (mission_number % 5 == 0):
-            print("eps = ", self.epsilon)
+        
+        #print("********************print eps ",eps) 
+        
+           
+        if len(possible_actions) == 6 and mission_number != 0:
             if self.epsilon > self.epsilon_min:
                 self.epsilon *= self.epsilon_decay
 
-        choice = numpy.random.choice([1,2],1, [eps, 1-eps])
+        choice = numpy.random.choice([1,2],1, p=[eps, 1-eps])
         a = []
+        
+        
         if choice == 1: 
             # rnd = random.random()
             a = random.randint(0, len(possible_actions) - 1)
@@ -201,6 +205,7 @@ class DashAgent(object):
             for act, v in self.q_table[curr_state].items():
                 if v == max_val:
                     a.append(act)
+                          
             return random.choice(a)
 
 
@@ -213,7 +218,7 @@ class DashAgent(object):
                     a.append(act)
             return random.choice(a)
         else:
-            return None
+            return random.choice(self.possible_actions)
 
     def best_policy(self, agent_host):
         """Reconstructs the best action list according to the greedy policy. """
@@ -223,14 +228,14 @@ class DashAgent(object):
             curr_state = self.current_state
             possible_actions = self.possible_actions
             next_a = self.best_action(frozenset(curr_state))
-            if next_a == None:
-                break
+            # if next_a == None:
+            #     break
             policy.append(next_a)
             total_r += self.act(self.current_location, next_a, self.grid)
             self.possible_actions.remove(next_a)
         self.act(self.current_location, 0, self.grid)
         print('Best reward: ' + str(total_r))
-        return total_r
+        return total_r, policy
 
     def update_q_table(self, tau, S, A, R, T):
         curr_s, curr_a, curr_r = S.popleft(), A.popleft(), R.popleft()
@@ -263,7 +268,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 200
+    num_repeats = 50
 
 
 mission_file = './project.xml'
@@ -287,12 +292,21 @@ for retry in range(max_retries):
 print("Waiting for the mission to start", end=' ')
 best_rewards = []
 for i in range(num_repeats):
+    agent.mission_number = i
     if i > 0 and i%5 == 0:
         print(agent.q_table)
         agent.current_state = ()
         agent.possible_actions = destinations.copy()
         agent.step_count = 0
-        best_rewards.append(agent.best_policy(agent_host))
+        r, p = agent.best_policy(agent_host)
+        print("best path" + str(p))
+        best_rewards.append(r)
+        
+        plt.plot(best_rewards, 'ro')
+        #plt.axis()
+        plt.ylabel("Best Reward")
+        plt.xlabel("Runs")
+        plt.show()
    
     world_state = agent_host.getWorldState()
     while not world_state.has_mission_begun:
@@ -319,7 +333,4 @@ plt.xlabel("Runs")
 plt.show()
 
 print("Done.")
-
-print()
-print("Cumulative rewards for all %d runs:" % num_repeats)
 # print(cumulative_rewards)
