@@ -43,11 +43,11 @@ Instead of having only 3 houses, we updated our environment to have 6 houses whi
 
 Here’s an example of our Q-Table after 5 runs:
 
-<img src="https://imgur.com/068vCXg">
+<img src="https://imgur.com/068vCXg.png">
 
 compared to after 20 runs:
 
-<img src="https://imgur.com/oLe1f9A">
+<img src="https://imgur.com/oLe1f9A.png">
 
 Since our Q-Table printed out the reward at the end of every fifth run, we were able to confirm that our agent was correctly learning better paths and starting to converge as the number of runs increased. 
 
