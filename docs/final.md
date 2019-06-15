@@ -39,7 +39,7 @@ Each house was assigned a different alpha value which would help calculate the r
 We used Bellman equations like before to choose our action at each state. After monitoring our agent, we found we were still achieving good results even though the state space and number of houses had increased. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action that would maximize its reward. The equation used to calculate the reward for each action is as follows:
 ><img align="middle" src="https://i.imgur.com/XNl2rQ2.png">
 
-where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = discount factor, which determined how much we value future rewards vs. current rewards.
+where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = the discount factor, which determined how much we value future rewards vs. current rewards.
 
 Since our status report, we have found that we may have placed a higher weight than neccessary on future rewards. However, this was a simple fix. Adjusting the gamma value to 0.8, which slightly lowered the weight of future rewards, gave us an optimal result and helped us analyze convergence. We also changed the calculation for our epsilon to a different decay equation:
 >epsilon = initial_epsilon<sup>n</sup>
