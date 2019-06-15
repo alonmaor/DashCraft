@@ -32,7 +32,7 @@ Here are the basics of our Q-Learning algorithm:
 We also updated the way we calculated our rewards. Our new reward equation is shown below:
 >reward = alpha_reward[house]*step_count
 
-<img align="middle" src="https://cdn.discordapp.com/attachments/576232242750291970/588973352035680256/eps_decay.png">
+
 
 Each house was assigned a different alpha value which would help calculate the reward given to the agent once it was visited. Initially, we were calculating the reward by multiplying each alpha value by the step count then subtracting this value from 50. However, we realized it made more sense create a more straighforward reward function, which ended up being the product of each alpha value and the step count. Therefore, using this new formula, houses with a higher alpha value should be visited first since they'll be multiplied by a larger number of steps, resulting in a higher reward. Now, instead of having alphas values reflect levels of intolerence, they represent levels of tolerance. In other words, visiting a house with low tolerance in the beginning and high tolerance later would present our agent with a higher reward.
 
