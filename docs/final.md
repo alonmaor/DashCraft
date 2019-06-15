@@ -64,7 +64,7 @@ compared to after 20 runs:
 Since our Q-Table printed out the reward at the end of every fifth run, we were able to confirm that our agent was correctly learning better paths and starting to converge as the number of runs increased. 
 
 We also confirmed our algorithm was converging by printing out a graph that mapped the run to the reward:
-<img src="https://i.imgur.com/PnMEeFo.png">
+<img src="https://imgur.com/pz0ghC6.png">
 
 As you can see, our graph clearly converged to the highest reward found by the most optimal path as our runs increased since our agent was constantly learning. We were easily able to evaluate our quantitative results by assessing our reward values. Printing out this graph helped us also evaluate our qualitative results, since it showed our agent not only found the highest reward value, but it was also consistently learning since its reward values gradually increased with very few outliers.
 
