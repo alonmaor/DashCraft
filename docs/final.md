@@ -30,11 +30,11 @@ Here are the basics of our Q-Learning algorithm:
 >Until q is terminal
 
 We also updated the way we calculated our rewards. Our new reward equation is shown below:
->reward = alpha_reward[house]*step_count
+>reward = -alpha_reward[house]*step_count
 
 
 
-Each house was assigned a different alpha value which would help calculate the reward given to the agent once it was visited. Initially, we were calculating the reward by multiplying each alpha value by the step count then subtracting this value from 50. However, we realized it made more sense create a more straighforward reward function, which ended up being the product of each alpha value and the step count. Therefore, using this new formula, houses with a higher alpha value should be visited first since they'll be multiplied by a larger number of steps, resulting in a higher reward. Now, instead of having alphas values reflect levels of intolerence, they represent levels of tolerance. In other words, visiting a house with low tolerance in the beginning and high tolerance later would present our agent with a higher reward.
+Each house was assigned a different alpha value which would help calculate the reward given to the agent once it was visited. Initially, we were calculating the reward by multiplying each alpha value by the step count then subtracting this value from 50. However, we realized it made more sense to create a more straighforward reward function, which ended up being the negative product of each alpha value and the step count. Therefore, using this new formula, houses with a higher alpha value should be visited first since they'll be multiplied by a small number of steps, resulting in a higher reward or a smaller penalty to the reward. Now, instead of having alphas values reflect levels of tolerence, they represent levels of intolerance. In other words, visiting a house with low tolerance in the beginning and high tolerance later would present our agent with a higher reward.
 
 We used Bellman equations like before to choose our action at each state. After monitoring our agent, we found we were still achieving good results even though the state space and number of houses had increased. Every time our agent reached a new state, it evaluated the possible rewards it could gain by choosing a particular action, then chose the action that would maximize its reward. The equation used to calculate the reward for each action is as follows:
 ><img align="middle" src="https://i.imgur.com/XNl2rQ2.png">
