@@ -53,7 +53,6 @@ class DashAgent(object):
 
             T = sys.maxsize
             for t in range(sys.maxsize):
-                # print(self.q_table)
                 time.sleep(0.1)
                 if t < T:
                     current_r = self.act(self.current_location, A[-1], self.grid)
@@ -63,8 +62,6 @@ class DashAgent(object):
                     if len(self.possible_actions) == 0:
                         # Terminating state
                         T = t + 1
-                        # present_reward = current_r
-                        # print("Reward:", present_reward)
                     else:
                         s = frozenset(self.current_state)
                         S.append(s)
@@ -93,7 +90,7 @@ class DashAgent(object):
         if dest == 0:
             return 0
         self.current_state += (dest,)
-        return self.alpha_reward[dest]*self.step_count
+        return -(self.alpha_reward[dest]*self.step_count)
 
     def execute_actions(self, agent_host, world_state, action_list):
         action_index = 0
@@ -133,19 +130,14 @@ class DashAgent(object):
         [prev.update({key:None}) for key in q.keys()]
         for node in q:
             neighbors = []
-            try:
-                if node not in range(0,21) and grid_obs[node-21] in ['air','wooden_door','tallgrass','double_plant']:
-                    neighbors.append(node-21)
-                if (node + 1) % 21 != 0 and grid_obs[node+1] in ['air','wooden_door','tallgrass','double_plant']:
-                    neighbors.append(node+1)
-                if node % 21 != 0 and grid_obs[node-1] in ['air','wooden_door','tallgrass','double_plant']:
-                    neighbors.append(node-1)
-                if node not in range(420, 441) and grid_obs[node+21] in ['air','wooden_door','tallgrass','double_plant']:
-                    neighbors.append(node+21)
-            except IndexError as ie:
-                print(ie)
-                print("Index: " + str(node))
-                print(q)
+            if node not in range(0,21) and grid_obs[node-21] in ['air','wooden_door','tallgrass','double_plant']:
+                neighbors.append(node-21)
+            if (node + 1) % 21 != 0 and grid_obs[node+1] in ['air','wooden_door','tallgrass','double_plant']:
+                neighbors.append(node+1)
+            if node % 21 != 0 and grid_obs[node-1] in ['air','wooden_door','tallgrass','double_plant']:
+                neighbors.append(node-1)
+            if node not in range(420, 441) and grid_obs[node+21] in ['air','wooden_door','tallgrass','double_plant']:
+                neighbors.append(node+21)
             for n in neighbors:
                 alt = 0
                 if n in dist:
@@ -191,6 +183,7 @@ class DashAgent(object):
         if len(possible_actions) == 6 and mission_number != 0:
             if self.epsilon > self.epsilon_min:
                 self.epsilon *= self.epsilon_decay
+                #print("------EPSILON: " + str(self.epsilon) + " ---------")
 
         choice = numpy.random.choice([1,2],1, p=[eps, 1-eps])
         a = []
@@ -212,10 +205,14 @@ class DashAgent(object):
     def best_action(self, curr_state):
         if curr_state in self.q_table:
             a = []
-            max_val = max(self.q_table[curr_state].values())
+            max_val = max([val for val in self.q_table[curr_state].values() if val != 0])
+            #print(max_val)
+            if max_val == None:
+                return random.choice(self.possible_actions)
             for act, v in self.q_table[curr_state].items():
                 if v == max_val:
                     a.append(act)
+            #print("actions = " + str(a))
             return random.choice(a)
         else:
             return random.choice(self.possible_actions)
@@ -268,7 +265,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 50
+    num_repeats = 200
 
 
 mission_file = './project.xml'
@@ -294,7 +291,9 @@ best_rewards = []
 for i in range(num_repeats):
     agent.mission_number = i
     if i > 0 and i%5 == 0:
-        print(agent.q_table)
+        # for item in agent.q_table.items():
+        #     print(item)
+        # print(agent.q_table)
         agent.current_state = ()
         agent.possible_actions = destinations.copy()
         agent.step_count = 0
@@ -302,11 +301,11 @@ for i in range(num_repeats):
         print("best path" + str(p))
         best_rewards.append(r)
         
-        plt.plot(best_rewards, 'ro')
-        #plt.axis()
-        plt.ylabel("Best Reward")
-        plt.xlabel("Runs")
-        plt.show()
+        # plt.plot(best_rewards, 'ro')
+        # #plt.axis()
+        # plt.ylabel("Best Reward")
+        # plt.xlabel("Runs")
+        # plt.show()
    
     world_state = agent_host.getWorldState()
     while not world_state.has_mission_begun:
