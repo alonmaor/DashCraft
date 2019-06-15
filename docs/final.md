@@ -42,7 +42,7 @@ We used Bellman equations like before to choose our action at each state. After 
 where q = the current state, a = the chosen action, R = the immediate reward, x = the current run, and gamma = discount factor, which determined how much we value future rewards vs. current rewards.
 
 Since our status report, we have found that we may have placed a higher weight than neccessary on future rewards. However, this was a simple fix. Adjusting the gamma value to 0.8, which slightly lowered the weight of future rewards, gave us an optimal result and helped us analyze convergence. We also changed the calculation for our epsilon to a different decay equation:
->epsilon = initial_epsilon<sub>n</sub>
+>epsilon = initial_epsilon<sup>n</sup>
 
 where the initial epsilon value is 0.995 and n is the number of runs thus far. This way our agent is able to explore many random paths at first while it tries to learn the environment, but later converges down to a few known paths and finally to one suboptimal path. We ended up changing our epsilon decay function because we conducted research and found this would produce better results than our initial function, which our results proved to be true.
 
